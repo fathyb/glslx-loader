@@ -1,0 +1,30 @@
+{
+  "name": "glslx-loader",
+  "version": "0.0.2",
+  "main": "build/main.js",
+  "module": "build/main.js",
+  "typings": "build/main.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "run-p build-loader build-runtime",
+    "build-loader": "tsc",
+    "build-runtime": "tsc -p tsconfig/runtime.json"
+  },
+  "files": [
+    "build",
+    "runtime",
+    "bin"
+  ],
+  "dependencies": {
+    "fathyb-glslx-fork": "^0.1.26",
+    "glob": "^7.1.2",
+    "glslx": "^0.1.25",
+    "mkdirp-promise": "^5.0.1",
+    "tslib": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^5.0.32",
+    "npm-run-all": "^4.1.1",
+    "typescript": "^2.5.2"
+  }
+}
