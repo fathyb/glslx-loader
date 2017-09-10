@@ -1,0 +1,12 @@
+{
+    "extends": "./build.json",
+    "compilerOptions": {
+        "module": "es6",
+        "alwaysStrict": true,
+        "rootDir": "../src/runtime",
+        "outDir": "../runtime"
+    },
+    "include": [
+        "../src/runtime/**/*.ts"
+    ]
+}
