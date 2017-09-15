@@ -3,6 +3,7 @@ import {resolve} from 'path'
 import {parse} from './glslx'
 import {compile} from './compiler/javascript'
 import {generateDeclaration} from './ambient'
+import {readFile, writeFile, findFiles} from './utils'
 
 export function loader(this: any, content: string): void {
 	const callback = this.async()
@@ -22,3 +23,24 @@ export function loader(this: any, content: string): void {
 		err => callback(err)
 	)
 }
+
+export async function generateRuntime(src: string, dest: string = `${src}.js`, decl: boolean = true): Promise<void> {
+	const content = await readFile(src)
+	const shaders = parse(content)
+	const promises = [writeFile(dest, compile(shaders))]
+
+	if(decl) {
+		promises.push(generateDeclaration(`${src}.d.ts`, shaders))
+	}
+
+	await Promise.all(promises)
+}
+
+export async function run() {
+    const files = await findFiles(process.argv.slice(2))
+
+    await Promise.all(
+        files.map(file => generateRuntime(file))
+    )
+}
+

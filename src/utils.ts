@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import * as glob from 'glob'
 
 export function promise<T>(fn: (...args: any[]) => any, ...args: any[]): Promise<T> {
@@ -30,6 +31,14 @@ export function findFiles(pattern: string|string[]): Promise<string[]> {
             }
         })
     })
+}
+
+export function readFile(path: string) {
+    return promise<string>(fs.readFile, path, {encoding: 'utf-8'})
+}
+
+export function writeFile(path: string, contents: string|Buffer) {
+    return promise<void>(fs.writeFile, path, contents)
 }
 
 export function map<T, V>(object: {
