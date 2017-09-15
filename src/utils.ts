@@ -1,5 +1,9 @@
+import {dirname} from 'path'
 import * as fs from 'fs'
+
 import * as glob from 'glob'
+import * as mkdirp from 'mkdirp-promise'
+
 
 export function promise<T>(fn: (...args: any[]) => any, ...args: any[]): Promise<T> {
     return new Promise<T>((resolve, reject) => {
@@ -37,7 +41,9 @@ export function readFile(path: string) {
     return promise<string>(fs.readFile, path, {encoding: 'utf-8'})
 }
 
-export function writeFile(path: string, contents: string|Buffer) {
+export async function writeFile(path: string, contents: string|Buffer) {
+    await mkdirp(dirname(path))
+
     return promise<void>(fs.writeFile, path, contents)
 }
 

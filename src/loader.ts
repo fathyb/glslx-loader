@@ -14,7 +14,7 @@ export function loader(this: any, content: string): void {
 		const rootDir = resolve('src')
 		const outDir = resolve('build/gen-src')
 		const output = resolve(path).replace(rootDir, outDir)
-	
+
 		await generateDeclaration(`${output}.d.ts`, shaders)
 
 		return compile(shaders)

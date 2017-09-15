@@ -11,6 +11,9 @@
         "lib": [
             "es2015", "dom"
         ],
+        "types": [
+            "commander"
+        ],
         "moduleResolution": "node",
         "rootDir": "../src",
         "outDir": "../build"
